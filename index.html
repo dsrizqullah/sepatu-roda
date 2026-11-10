@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewa Sepatu Roda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <nav id="sidebar" class="sidebar">
+        <span id="close-sidebar" class="close-sidebar-btn">&times;</span>
+        <a href="#" id="menu-katalog" class="active">Katalog & Monitoring</a>
+        <a href="#" id="menu-history">History Transaksi</a>
+    </nav>
+
+    <header>
+        <button id="menu-btn" class="hamburger">&#9776;</button>
+        <h1>RENTAL SEPATU RODA</h1>
+    </header>
+
+    <main>
+        <!-- HALAMAN KATALOG & MONITORING -->
+        <div id="view-katalog">
+            <section>
+                <h2>Katalog (Tersedia)</h2>
+                <div id="product-list" class="grid-container">
+                    <!-- Produk akan di-render dari JavaScript -->
+                </div>
+            </section>
+
+            <section class="monitoring-section">
+                <h2>Monitoring Sewa Aktif</h2>
+                <div id="active-rentals" class="grid-container">
+                    <!-- Data sewa aktif akan di-render dari JavaScript -->
+                </div>
+            </section>
+        </div>
+
+        <!-- HALAMAN HISTORY TRANSAKSI -->
+        <div id="view-history" class="d-none">
+            <h2>History Transaksi</h2>
+            <div class="table-container">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Penyewa</th>
+                            <th>Sepatu</th>
+                            <th>Durasi</th>
+                            <th>Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-list">
+                        <!-- History akan di-render dari Firebase -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Form Sewa -->
+    <div id="rental-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Form Sewa <br><span id="modal-skate-name" style="color: #EF5F18;"></span></h3>
+            <form id="rental-form">
+                <input type="hidden" id="skate-id">
+                
+                <label for="renter-name">Nama Penyewa:</label>
+                <input type="text" id="renter-name" placeholder="Masukkan nama..." required>
+
+                <label for="duration">Durasi Sewa (Menit):</label>
+                <input type="number" id="duration" placeholder="Contoh: 60" min="1" required>
+
+                <label for="price">Harga Sewa (Rp):</label>
+                <input type="number" id="price" placeholder="Contoh: 25000" min="0" required>
+
+                <button type="submit">MULAI SEWA</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link to JavaScript (Module untuk Firebase) -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>

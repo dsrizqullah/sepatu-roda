@@ -210,6 +210,26 @@ th {
     background-color: var(--primary-blue);
     color: var(--white);
 }
+.history-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    padding: 8px;
+    background-color: #dc3545;
+}
+.history-delete-btn:hover { background-color: #b02a37; }
+.history-delete-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
 
 /* Responsif Mobile */
 @media (max-width: 600px) {

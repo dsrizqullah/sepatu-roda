@@ -2,7 +2,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { 
-    getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, query, where 
+    getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, where
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // TODO: GANTI INI DENGAN CONFIG DARI FIREBASE PROJECT-MU!
@@ -92,7 +92,7 @@ onSnapshot(activeQ, (snapshot) => {
 const historyQ = query(rentalsCollection, where("status", "==", "finished"));
 onSnapshot(historyQ, (snapshot) => {
     let histories = [];
-    snapshot.forEach(doc => histories.push(doc.data()));
+    snapshot.forEach(rentalDoc => histories.push({ ...rentalDoc.data(), docId: rentalDoc.id }));
     
     // Urutkan dari yang terbaru ke terlama menggunakan JavaScript
     histories.sort((a, b) => b.createdAt - a.createdAt);
@@ -111,7 +111,17 @@ onSnapshot(historyQ, (snapshot) => {
             <td>${data.skateName}</td>
             <td>${data.duration} Menit</td>
             <td><strong>Rp ${data.price.toLocaleString('id-ID')}</strong></td>
+            <td>
+                <button class="history-delete-btn" type="button" aria-label="Hapus transaksi ${data.renterName}" title="Hapus transaksi">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v7m6-7v7" />
+                    </svg>
+                </button>
+            </td>
         `;
+        tr.querySelector('.history-delete-btn').addEventListener('click', () => {
+            window.deleteHistory(data.docId, data.renterName);
+        });
         historyListEl.appendChild(tr);
     });
 });
@@ -212,6 +222,18 @@ window.finishRental = async function(docId) {
         });
     } catch (error) {
         console.error("Gagal update data:", error);
+    }
+};
+
+// ===== HAPUS TRANSAKSI DARI HISTORY =====
+window.deleteHistory = async function(docId, renterName) {
+    if (!confirm(`Hapus transaksi atas nama ${renterName}?`)) return;
+
+    try {
+        await deleteDoc(doc(db, "rentals", docId));
+    } catch (error) {
+        console.error("Gagal menghapus transaksi:", error);
+        alert("Gagal menghapus transaksi. Cek koneksi internet.");
     }
 };
 

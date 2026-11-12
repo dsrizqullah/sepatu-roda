@@ -20,11 +20,11 @@ const db = getFirestore(app);
 const rentalsCollection = collection(db, "rentals");
 
 const products = [
-    { id: 1, name: 'Inline Skate Pro Red', image: 'assets/sepatu-roda-images.jpeg' },
-    { id: 2, name: 'Classic Retro Blue', image: 'assets/sepatu-roda-images.jpeg' },
-    { id: 3, name: 'Urban Freeskate Black', image: 'assets/sepatu-roda-images.jpeg' },
-    { id: 4, name: 'Speed Skates White', image: 'assets/sepatu-roda-images.jpeg' },
-    { id: 5, name: 'Vintage Pink Roller', image: 'assets/sepatu-roda-images.jpeg' }
+    { id: 1, name: 'Sepatu Roda 1', image: 'assets/sepatu-roda-image-1.png' },
+    { id: 2, name: 'Sepatu Roda 2', image: 'assets/sepatu-roda-image-1.png' },
+    { id: 3, name: 'Sepatu Roda 3', image: 'assets/sepatu-roda-image-3.png' },
+    { id: 4, name: 'Sepatu Roda 4', image: 'assets/sepatu-roda-image-4.png' },
+    { id: 5, name: 'Sepatu Roda 5', image: 'assets/sepatu-roda-image-5.png' }
 ];
 
 let activeRentals = [];
